@@ -74,8 +74,12 @@ List deletePos(List L, int position){
 }
 
 int locate(List L, int position){
-    if(position >= 0 && position < L.count){
-        return L.elem[position];
+    int x;
+
+    for(x = 0; x < L.count; x++){
+        if(x == position){
+            return L.elem[x];
+        }
     }
     return -1;
 }
