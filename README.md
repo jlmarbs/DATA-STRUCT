@@ -3,7 +3,7 @@
 
 ## LISTS OF FOLDERS
 - Array List
-  - [Variaton1](./arrayList/Variation1.c)
-  - [Variaton2](./arrayList/Variation2.c)
-  - [Variaton3](./arrayList/Variation3.c)
-  - [Variaton4](./arrayList/Variation4.c)
+  - [Variation1](./arrayList/Variation1.c)
+  - [Variation2](./arrayList/Variation2.c)
+  - [Variation3](./arrayList/Variation3.c)
+  - [Variation4](./arrayList/Variation4.c)
