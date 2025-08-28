@@ -51,7 +51,7 @@ List insertPos(List L, int data, int position){
         if(position >= 0 && position <= L.count){
             for(x = L.count; x > position; x--){
             L.elem[x] = L.elem[x - 1];
-        }
+            }
         L.elem[position] = data;
         L.count++;
         }
