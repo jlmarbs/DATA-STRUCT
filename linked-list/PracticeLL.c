@@ -16,7 +16,7 @@ void displayList(LIST LL);
 //will add functionalities later
 void insertSorted(LIST *LL, int data);
 void insertPos(LIST *LL, int data, int pos);
-void deletePos(LIST *LL, int data);
+void delete(LIST *LL, int data);
 
 int main(){
 
@@ -104,7 +104,7 @@ void insertPos(LIST *LL, int data, int pos){
 
 }
 
-void deletePos(LIST *LL, int data){
+void delete(LIST *LL, int data){
     LIST *trav;
     LIST temp;
 
