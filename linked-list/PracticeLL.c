@@ -12,10 +12,7 @@ void insertLast(LIST *LL, int data);
 void deleteFirst(LIST *LL);
 void deleteLast(LIST *LL);
 void displayList(LIST LL);
-
-//will add functionalities later
 void insertSorted(LIST *LL, int data);
-void insertPos(LIST *LL, int data, int pos);
 void delete(LIST *LL, int data);
 
 int main(){
@@ -97,11 +94,17 @@ void displayList(LIST LL){
 }
 
 void insertSorted(LIST *LL, int data){
+    LIST *trav;
 
-}
+    for(trav = LL; *trav != NULL && (*trav)->elem < data; trav = &(*trav)->link){}
 
-void insertPos(LIST *LL, int data, int pos){
+    LIST newNode = (LIST)malloc(sizeof(struct node));
 
+    if(newNode != NULL){
+        newNode->elem = data;
+        newNode->link = *trav;
+        *trav = newNode;
+    }
 }
 
 void delete(LIST *LL, int data){
