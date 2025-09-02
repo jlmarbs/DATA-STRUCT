@@ -195,12 +195,12 @@ int locate(List *list, int data){
 
         for(current = list->head; current != NULL; current = current->next){
             if(current->data == data){
-                index++;
+                return index;
             }
+            index++;
         }
-        return index;
+        return -1;
     }
-    return -1;
 }
 
 void display(List *list){
