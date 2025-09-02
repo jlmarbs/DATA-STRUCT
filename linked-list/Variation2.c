@@ -68,7 +68,7 @@ void empty(List *list){
 
     for(current = list->head; current != NULL; current = temp){
         temp = current->next;
-        free(temp);
+        free(current);
     }
     list->head = NULL;
     list->count = 0;
@@ -130,32 +130,36 @@ void insertPos(List *list, int data, int index){
 void deleteStart(List *list){
     Node *current;
 
-    current = list->head;
-    list->head = current->next;
-    free(current);
-    list->count--;
-}
-
-void deleteLast(List *list){
-    if(list->count == 1){
-        free(list->head);
-        list->head = NULL;
-        list->count--;
-    } else{
-        Node *current = list->head;
-        int x;
-
-        for(x = 0; x < list->count - 2; x++){
-            current = current->next;
-        }
-        free(current->next);
-        current->next = NULL;
+    if(list->head != NULL){
+        current = list->head;
+        list->head = current->next;
+        free(current);
         list->count--;
     }
 }
 
+void deleteLast(List *list){
+    if(list->head != NULL){
+        if(list->count == 1){
+            free(list->head);
+            list->head = NULL;
+            list->count--;
+        } else{
+            Node *current = list->head;
+            int x;
+
+            for(x = 0; x < list->count - 2; x++){
+                current = current->next;
+            }
+            free(current->next);
+            current->next = NULL;
+            list->count--;
+        }
+    }
+}
+
 void deletePos(List *list, int index){
-    if(index >= 0 && index <= list->count){
+    if(index >= 0 && index < list->count){
         if(index == 0){
             deleteStart(list);
         } else{
@@ -178,7 +182,7 @@ int retrieve(List *list, int index){
         Node *current = list->head;
         int x;
 
-        for(x = 0; x < list->count; x++){
+        for(x = 0; x < index; x++){
             current = current->next;
         }
         return current->data;
