@@ -13,4 +13,11 @@
   - [Variation2](./linked-list/Variation2.c)
 
 - Stack
-### COMING SOON
+  - Array
+    - [Variation1](./Stack/Array/StackV1.c)
+    - [Variation2](./Stack/Array/StackV2.c)
+
+- Queue
+  - Array (Circular Array)
+    - [Variation1](./Queue/Array/QueueV1.c)
+    - [Variation2](./Queue/Array/QueueV2.c)
