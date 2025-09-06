@@ -20,3 +20,4 @@
 - Queue
   - Array (Circular Array)
     - [Variation1](./Queue/Array/QueueV1.c)
+    - [Variation2](./Queue/Array/QueueV2.c)
