@@ -12,10 +12,15 @@
   - [Variation1](./linked-list/Variation1.c)
   - [Variation2](./linked-list/Variation2.c)
 
+- Cursor Based
+  - [Variation1](./CursorBased/Variation1.c)
+
 - Stack
   - Array
     - [Variation1](./Stack/Array/StackV1.c)
     - [Variation2](./Stack/Array/StackV2.c)
+  - Linked List
+    - [Variation1](./Stack/LinkedList/Variation1.c)
 
 - Queue
   - Array (Circular Array)
