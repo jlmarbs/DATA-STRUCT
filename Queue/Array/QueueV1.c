@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #define MAX 10
 
 typedef struct{
@@ -14,6 +15,8 @@ typedef struct{
 } Queue;
 
 Queue* initialize();
+bool isEmpty(Queue* q);
+bool isFull(Queue* q);
 void enqueue(Queue* q, int value);
 int dequeue(Queue* q);
 int front(Queue* q);
@@ -42,11 +45,19 @@ Queue* initialize(){
     return new;
 }
 
+bool isEmpty(Queue* q){
+    return (q->list.count == 0) ? 1 : 0;
+}
+
+bool isFull(Queue* q){
+    return (q->list.count == MAX) ? 1 : 0;
+}
+
 void enqueue(Queue* q, int value){
-    if(q->list.count != MAX){
+    if(!isFull(q)){
         if(q->list.count == 0){
-            q->front++;
-            q->rear++;
+            q->front = 0;
+            q->rear = 0;
         } else{
             q->rear = (q->rear + 1) % MAX;
         }
@@ -56,9 +67,9 @@ void enqueue(Queue* q, int value){
 }
 
 int dequeue(Queue* q){
-    if(q->list.count != 0){
+    if(!isEmpty(q)){
         int value = q->list.items[q->front];
-        if(q->list.count == 1){
+        if(q->front == 1){
             q->front = -1;
             q->rear = -1;
             q->list.count = 0;
@@ -71,18 +82,17 @@ int dequeue(Queue* q){
 }
 
 int front(Queue* q){
-    if(q->list.count != 0){
+    if(!isEmpty(q)){
         return q->list.items[q->front];
     }
 }
 
 void display(Queue* q){
     int x;
-
-    if(q->list.count != 0){
+    if(!isEmpty(q)){
         for(x = q->front; x <= q->rear; x++){
-            printf("%d\n", q->list.items[x]);
+            printf("%d ", q->list.items[x]);
         }
-        printf("\n");
     }
+    printf("\n");
 }
