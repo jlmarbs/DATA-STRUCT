@@ -36,12 +36,12 @@ int main(){
 }
 
 Queue* initialize(){
-    Queue *new = malloc(sizeof(Queue));
-    if(new != NULL){
-        new->front = NULL;
-        new->rear = NULL;
+    Queue *init = malloc(sizeof(Queue));
+    if(init != NULL){
+        init->front = NULL;
+        init->rear = NULL;
     }
-    return new;
+    return init;
 }
 
 bool isFull(Queue* q){
@@ -57,10 +57,8 @@ void enqueue(Queue* q, int value){
     if(newNode != NULL){
         newNode->data = value;
         newNode->next = NULL;
-
         if(isEmpty(q)){
-            q->front = newNode;
-            q->rear = newNode;
+            q->front = q->rear = newNode;
         } else{
             q->rear->next = newNode;
             q->rear = newNode;
@@ -69,11 +67,15 @@ void enqueue(Queue* q, int value){
 }
 
 int dequeue(Queue* q){
-    if(q->front != NULL){
-        LLQueue temp;
-        temp = q->front;
-        q->front = q->front->next;
+    if(!isEmpty(q)){
+        LLQueue temp = q->front;
+        int value = temp->data;
+        q->front = temp->next;
+        if(q->front == NULL){
+            q->rear = NULL;
+        }
         free(temp);
+        return value;
     }
 }
 
@@ -84,20 +86,19 @@ int front(Queue* q){
 }
 
 void display(Queue* q){
-    Queue *tempQueue = initialize();
-    int value;
+    Queue *temp = initialize();
+    int val;
 
     while(!isEmpty(q)){
-        value = front(q);
-        printf("%d ", value);
+        val = front(q);
+        printf("%d ", val);
         dequeue(q);
-        enqueue(tempQueue, value);
+        enqueue(temp, val);
     }
-
-    while(!isEmpty(tempQueue)){
-        value = front(tempQueue);
-        dequeue(tempQueue);
-        enqueue(q, value);
+    while(!isEmpty(temp)){
+        val = front(temp);
+        dequeue(temp);
+        enqueue(q, val);
     }
     printf("\n");
 }

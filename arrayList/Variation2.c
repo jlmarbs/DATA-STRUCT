@@ -47,11 +47,10 @@ void initialize(EPtr L){
 }
 
 void insertPos(EPtr L, int data, int position){
-    int x;
-
-    if(L->count < MAX){
-        if(position >= 0 && position <= L->count){
-            for(x = L->count; x > position - 1; x--){
+    if(position >= 0 && position <= L->count){
+        if(L->count < MAX){
+            int x;
+            for(x = L->count; x > position; x--){
                 L->elem[x] = L->elem[x - 1];
             }
             L->elem[position] = data;
@@ -61,10 +60,9 @@ void insertPos(EPtr L, int data, int position){
 }
 
 void deletePos(EPtr L, int position){
-    int x;
-    
-    if(L->count > 0){
-        if(position >= 0 && position <= L->count){
+    if(position >= 0 && position <= L->count){
+        if(L->count > 0){
+            int x;
             for(x = position; x < L->count; x++){
                 L->elem[x] = L->elem[x + 1];
             }
@@ -75,43 +73,37 @@ void deletePos(EPtr L, int position){
 
 int locate(EPtr L, int data){
     int x;
-
     for(x = 0; x < L->count; x++){
         if(L->elem[x] == data){
-            return x;
+            return L->elem[x];
+        } else{
+            return -1;
         }
     }
-    return -1;
 }
 
 int retrieve(EPtr L, int position){
-    if(position >= 0 && position < L->count){
+    if(position >= 0 && position <= L->count){
         return L->elem[position];
     }
-    return -1;
 }
 
 void insertSorted(EPtr L, int data){
-    int x;
-    int pos;
-
-    if(L->count < MAX){
-        for(pos = 0; pos < L->count; pos++){
-            if(L->elem[pos] >= data){
-                break; //could do while loop to remove this break statement
-            }
+    int x, pos;
+    for(pos = 0; pos < L->count; pos++){
+        if(L->elem[pos] >= data){
+            break;
         }
-        for(x = L->count; x > pos; x--){
-            L->elem[x] = L->elem[x - 1];
-        }
-        L->elem[pos] = data;
-        L->count++;
     }
+    for(x = L->count; x > pos; x--){
+        L->elem[x] = L->elem[x - 1];
+    }
+    L->elem[pos] = data;
+    L->count++;
 }
 
 void display(EPtr L){
     int x;
-
     for(x = 0; x < L->count; x++){
         printf("%d ", L->elem[x]);
     }

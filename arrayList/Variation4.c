@@ -63,22 +63,18 @@ int main(){
 
 void initialize(List *L){
     L->elemPTR = (int*)malloc(sizeof(int) * LENGTH);
-
     if(L->elemPTR != NULL){
         L->max = LENGTH;
+        L->count = 0;
     }
-    L->count = 0;
 }
 
 void insertPos(List *L, int data, int position){
-    int x;
-
     if(L->count >= L->max){
         resize(L);
-        printf("if you see this, realloc worked\n");
     }
-
     if(position >= 0 && position <= L->count){
+        int x;
         for(x = L->count; x > position; x--){
             L->elemPTR[x] = L->elemPTR[x - 1];
         }
@@ -88,9 +84,8 @@ void insertPos(List *L, int data, int position){
 }
 
 void deletePos(List *L, int position){
-    int x;
-
     if(position >= 0 && position <= L->count){
+        int x;
         for(x = position; x < L->count; x++){
             L->elemPTR[x] = L->elemPTR[x + 1];
         }
@@ -100,48 +95,40 @@ void deletePos(List *L, int position){
 
 int locate(List *L, int data){
     int x;
-
     for(x = 0; x < L->count; x++){
         if(L->elemPTR[x] == data){
-            return x;
+            return L->elemPTR[x];
+        } else{
+            return -1;
         }
     }
-    return -1;
 }
 
 int retrieve(List *L, int position){
     if(position >= 0 && position <= L->count){
         return L->elemPTR[position];
     }
-    return -1;
 }
 
 void insertSorted(List *L, int data){
-    int x;
-    int pos;
-
+    int x, pos;
     if(L->count >= L->max){
         resize(L);
-        printf("if you see this, realloc worked\n");
     }
-
     for(pos = 0; pos < L->count; pos++){
         if(L->elemPTR[pos] >= data){
             break;
         }
     }
-
     for(x = L->count; x > pos; x--){
         L->elemPTR[x] = L->elemPTR[x - 1];
     }
-
     L->elemPTR[pos] = data;
     L->count++;
 }
 
 void display(List *L){
     int x;
-
     for(x = 0; x < L->count; x++){
         printf("%d ", L->elemPTR[x]);
     }
@@ -151,17 +138,10 @@ void display(List *L){
 void resize(List *L){
     int newMax = L->max * 2;
     int *newPTR = (int*)realloc(L->elemPTR, sizeof(int) * newMax);
-
     if(newPTR != NULL){
         L->elemPTR = newPTR;
         L->max = newMax;
-    } else{
-        printf("idk what u did wrong gang\n");
     }
 }
 
-void makeNULL(List *L){
-    free(L->elemPTR);
-    L->count = 0;
-    L->max = 0;
-}
+void makeNULL(List *L);

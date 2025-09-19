@@ -38,9 +38,9 @@ int main(){
 Queue* initialize(){
     Queue *new = malloc(sizeof(Queue));
     if(new != NULL){
+        new->list.count = 0;
         new->front = -1;
         new->rear = -1;
-        new->list.count = 0;
     }
     return new;
 }
@@ -88,11 +88,19 @@ int front(Queue* q){
 }
 
 void display(Queue* q){
-    int x;
-    if(!isEmpty(q)){
-        for(x = q->front; x <= q->rear; x++){
-            printf("%d ", q->list.items[x]);
-        }
+    Queue *temp = initialize();
+    int val;
+
+    while(!isEmpty(q)){
+        val = front(q);
+        printf("%d ", val);
+        dequeue(q);
+        enqueue(temp, val);
+    }
+    while(!isEmpty(temp)){
+        val = front(temp);
+        dequeue(temp);
+        enqueue(q, val);
     }
     printf("\n");
 }

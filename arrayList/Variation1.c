@@ -45,25 +45,23 @@ List initialize(List L){
 }
 
 List insertPos(List L, int data, int position){
-    int x;
-
-    if(L.count < MAX){
-        if(position >= 0 && position <= L.count){
+    if(position >= 0 && position <= L.count){
+        if(L.count < MAX){
+            int x;
             for(x = L.count; x > position; x--){
-            L.elem[x] = L.elem[x - 1];
+                L.elem[x] = L.elem[x - 1];
             }
-        L.elem[position] = data;
-        L.count++;
+            L.elem[position] = data;
+            L.count++;
         }
     }
     return L;
 }
 
 List deletePos(List L, int position){
-    int x;
-
-    if(L.count > 0){
-        if(position >= 0 && position <= L.count){
+    if(position >= 0 && position <= L.count){
+        if(L.count > 0){
+            int x;
             for(x = position; x < L.count; x++){
                 L.elem[x] = L.elem[x + 1];
             }
@@ -75,19 +73,17 @@ List deletePos(List L, int position){
 
 int locate(List L, int position){
     int x;
-
     for(x = 0; x < L.count; x++){
-        if(x == position){
+        if(L.elem[x] == position){
             return L.elem[x];
+        } else{
+            return -1;
         }
     }
-    return -1;
 }
 
 List insertSorted(List L, int data){
-    int x;
-    int pos;
-
+    int x, pos;
     if(L.count < MAX){
         for(pos = 0; pos < L.count; pos++){
             if(L.elem[pos] >= data){

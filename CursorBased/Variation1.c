@@ -30,9 +30,9 @@ int main(){
     VHeap test;
     initialize(&test);
 
-    insertFirst(&L, &test, 10);
-    insertFirst(&L, &test, 20);
-    insertFirst(&L, &test, 30);
+    insertSorted(&L, &test, 10);
+    insertSorted(&L, &test, 70);
+    insertSorted(&L, &test, 30);
     display(L, test);
 
     delete(&L, &test, 30);
@@ -91,7 +91,22 @@ void insertLast(int* L, VHeap* V, int elem){
 }
 
 void insertSorted(int* L, VHeap* V, int elem){
-
+    int newCell = allocSpace(V);
+    if(newCell != -1){
+        V->H[newCell].elem = elem;
+        
+        if(*L == -1 || elem < V->H[*L].elem){
+            V->H[newCell].next = *L;
+            *L = newCell;
+        } else{
+            int prev = *L;
+            while(V->H[prev].next != -1 && V->H[V->H[prev].next].elem < elem){
+                prev = V->H[prev].next;
+            }
+            V->H[newCell].next = V->H[prev].next;
+            V->H[prev].next = newCell;
+        }
+    }
 }
 
 void delete(int* L, VHeap* V, int elem){

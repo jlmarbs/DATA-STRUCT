@@ -77,11 +77,19 @@ int peek(Stack* s){
 }
 
 void display(Stack* s){
-    if(!isEmpty(s)){
-        Node *trav;
-        for(trav = s->top; trav != NULL; trav = trav->next){
-            printf("%d\n", trav->data);
-        }
+    Stack *temp = initialize();
+    int val;
+
+    while(!isEmpty(s)){
+        val = peek(s);
+        printf("%d\n", val);
+        pop(s);
+        push(temp, val);
+    }
+    while(!isEmpty(temp)){
+        val = peek(temp);
+        pop(temp);
+        push(s, val);
     }
     printf("\n");
 }

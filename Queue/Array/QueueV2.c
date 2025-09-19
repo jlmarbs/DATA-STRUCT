@@ -36,15 +36,14 @@ Queue* initialize(){
         new->front = 1;
         new->rear = 0;
     }
-    return new;
 }
 
 int isEmpty(Queue* q){
-    return (q->front == (q->rear + 1) % MAX);
+    return q->front == (q->rear + 1) % MAX;
 }
 
 int isFull(Queue* q){
-    return (q->front == (q->rear + 2) % MAX);
+    return q->front == (q->rear + 2) % MAX;
 }
 
 void enqueue(Queue* q, int value){
@@ -56,9 +55,9 @@ void enqueue(Queue* q, int value){
 
 int dequeue(Queue* q){
     if(!isEmpty(q)){
-        int elem = q->items[q->front];
+        int value = q->items[q->front];
         q->front = (q->front + 1) % MAX;
-        return elem;
+        return value;
     }
 }
 
@@ -69,12 +68,19 @@ int front(Queue* q){
 }
 
 void display(Queue* q){
-    int x;
+    Queue *temp = initialize();
+    int val;
 
-    if(!isEmpty(q)){
-        for(x = q->front; x != (q->rear + 1) % MAX; x = (x + 1) % MAX){
-            printf("%d\n", q->items[x]);
-        }
+    while(!isEmpty(q)){
+        val = front(q);
+        printf("%d ", val);
+        dequeue(q);
+        enqueue(temp, val);
+    }
+    while(!isEmpty(temp)){
+        val = front(temp);
+        dequeue(temp);
+        enqueue(q, val);
     }
     printf("\n");
 }
